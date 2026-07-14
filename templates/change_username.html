@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Change Username</title>
+</head>
+
+<body>
+
+<h2>Change Username</h2>
+
+<form method="post">
+<input type="text" name="new_username" placeholder="Enter new username" required>
+<button type="submit">Update</button>
+</form>
+
+<p>{{ message }}</p>
+
+<a href="{{ url_for('dashboard') }}">⬅ Back to Dashboard</a>
+
+</body>
+</html>

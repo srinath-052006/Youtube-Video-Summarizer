@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .video-box {
+            height: 80px;
+        }
+
+        .summary-box {
+            height: 350px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+        }
+
+        h2, h3 {
+            margin-top: 30px;
+        }
+
+        .top-links {
+            margin-bottom: 15px;
+        }
+        .menu-container{
+          position:absolute;
+          top:20px;
+          right:30px;
+        }
+
+        .menu-btn{
+          padding:8px 15px;
+          font-size:16px;
+          cursor:pointer;
+        }
+
+        .menu-dropdown{
+          display:none;
+          position:absolute;
+          right:0;
+          background:white;
+          border:1px solid #ccc;
+          width:180px;
+          box-shadow:0px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .menu-dropdown a,
+        .menu-dropdown p{
+          display:block;
+          padding:10px;
+          text-decoration:none;
+          color:black;
+        }
+
+        .menu-dropdown a:hover{
+           background:#f2f2f2;
+        }
+
+        .menu-container:hover .menu-dropdown{
+           display:block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Welcome, {{ username }}</h2>
+
+    <div class="top-links">
+        <a href="{{ url_for('logout') }}">Logout</a> |
+        <a href="{{ url_for('history') }}">View History</a>
+    </div>
+
+    <form method="post">
+        <input type="text" name="url" placeholder="Paste YouTube URL" required>
+        <button name="action" value="get_video">Get Video (Title)</button>
+        <button name="action" value="summarize">Get Summarise (AI)</button>
+    </form>
+
+    <h3>Video Details</h3>
+    <textarea class="video-box" readonly>{{ video_details }}</textarea>
+
+    <h3>AI Summary & Concepts</h3>
+    <textarea class="summary-box" readonly>{{ summary }}</textarea>
+
+    <form method="post" action="{{ url_for('download_pdf') }}">
+        <input type="hidden" name="title" value="{{ video_details }}">
+        <input type="hidden" name="summary" value="{{ summary }}">
+
+        {% if summary %}
+        <button type="submit">📄 Save as PDF</button>
+        {% endif %}
+    </form>
+
+</div>
+
+<div class="menu-container">
+    <button class="menu-btn">☰ Menu</button>
+
+    <div class="menu-dropdown">
+        <p><b>User:</b> {{ username }}</p>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Home</a>
+
+        <a href="{{ url_for('history') }}">📜 History</a>
+
+        <a href="{{ url_for('change_username') }}">✏ Change Username</a>
+
+        <a href="{{ url_for('delete_account') }}">🗑 Delete Account</a>
+
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 0.5px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #32cd32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #28a428;
+        }
+
+        p.error {
+            color: red;
+            margin-top: 15px;
+        }
+
+        .links {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #4e54c8;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Forgot Password</h2>
+
+    <form method="post">
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <button type="submit">Send OTP</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <div class="links">
+        <a href="{{ url_for('login') }}">Back to Login</a>
+    </div>
+</div>
+
+</body>
+</html>
